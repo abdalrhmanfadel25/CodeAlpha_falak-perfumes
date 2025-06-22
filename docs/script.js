@@ -126,6 +126,118 @@ const sampleProducts = [
         image: '',
         inStock: true,
         rating: 4.7
+    },
+    {
+        _id: 'aurora-borealis-009',
+        name: 'Aurora Borealis',
+        description: 'Northern lights captured in a bottle - ethereal and mesmerizing. A magical blend of mint, eucalyptus, and cool spices that dances like the aurora.',
+        price: 1150,
+        originalPrice: 1450,
+        discountPercentage: 21,
+        category: 'Men',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.9
+    },
+    {
+        _id: 'moonlight-serenade-010',
+        name: 'Moonlight Serenade',
+        description: 'Romantic evening notes with lunar elegance. A captivating blend of white flowers, moonstone, and silver musk that whispers of midnight romance.',
+        price: 950,
+        originalPrice: 1180,
+        discountPercentage: 19,
+        category: 'Women',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.8
+    },
+    {
+        _id: 'cosmic-voyage-011',
+        name: 'Cosmic Voyage',
+        description: 'Adventure in every drop - bold and exploratory. A daring blend of leather, tobacco, and exotic spices that takes you on an interstellar journey.',
+        price: 1350,
+        originalPrice: 1700,
+        discountPercentage: 21,
+        category: 'Men',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.6
+    },
+    {
+        _id: 'stellar-symphony-012',
+        name: 'Stellar Symphony',
+        description: 'Orchestral notes that harmonize with the cosmos. A complex blend of multiple florals, woods, and musks that creates a symphony of scents.',
+        price: 1100,
+        originalPrice: 1400,
+        discountPercentage: 21,
+        category: 'Women',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.7
+    },
+    {
+        _id: 'nebula-whisper-013',
+        name: 'Nebula Whisper',
+        description: 'Soft, intimate notes that speak of cosmic secrets. A gentle blend of iris, violet, and cashmere that whispers of distant galaxies.',
+        price: 820,
+        originalPrice: 1050,
+        discountPercentage: 22,
+        category: 'Women',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.5
+    },
+    {
+        _id: 'solar-flare-014',
+        name: 'Solar Flare',
+        description: 'Intense and powerful like a solar eruption. A bold blend of black pepper, cardamom, and leather that commands attention.',
+        price: 1250,
+        originalPrice: 1600,
+        discountPercentage: 22,
+        category: 'Men',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.8
+    },
+    {
+        _id: 'lunar-eclipse-015',
+        name: 'Lunar Eclipse',
+        description: 'Dark and mysterious like a lunar eclipse. A deep blend of oud, dark chocolate, and black orchid that reveals hidden depths.',
+        price: 1400,
+        originalPrice: 1800,
+        discountPercentage: 22,
+        category: 'Women',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.9
+    },
+    {
+        _id: 'cosmic-dust-016',
+        name: 'Cosmic Dust',
+        description: 'Ethereal and weightless like stardust. A light blend of white musk, cotton, and fresh air that feels like floating in space.',
+        price: 880,
+        originalPrice: 1100,
+        discountPercentage: 20,
+        category: 'Men',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.4
     }
 ];
 
@@ -134,22 +246,62 @@ const sampleFeedback = [
     {
         name: 'Sarah Johnson',
         rating: 5,
-        comment: 'Absolutely love the Cosmic Nebula! It\'s like wearing a piece of the universe. The fragrance is so unique and long-lasting.'
+        comment: 'Absolutely love the Cosmic Nebula! It\'s like wearing a piece of the universe. The fragrance is so unique and long-lasting. I get compliments every time I wear it.'
     },
     {
         name: 'Michael Chen',
         rating: 5,
-        comment: 'Stellar Rose is my new signature scent. It\'s elegant, sophisticated, and gets me compliments every time I wear it.'
+        comment: 'Stellar Rose is my new signature scent. It\'s elegant, sophisticated, and gets me compliments every time I wear it. The cosmic twist makes it truly special.'
     },
     {
         name: 'Emma Rodriguez',
         rating: 4,
-        comment: 'Lunar Jasmine is perfect for evening events. The jasmine notes are so romantic and the cosmic twist makes it special.'
+        comment: 'Lunar Jasmine is perfect for evening events. The jasmine notes are so romantic and the cosmic twist makes it special. It\'s become my go-to for date nights.'
     },
     {
         name: 'David Thompson',
         rating: 5,
-        comment: 'Galaxy Amber is exactly what I was looking for. Warm, masculine, and with that mysterious cosmic quality. Highly recommend!'
+        comment: 'Galaxy Amber is exactly what I was looking for. Warm, masculine, and with that mysterious cosmic quality. Highly recommend for any man who wants to stand out.'
+    },
+    {
+        name: 'Sophie Williams',
+        rating: 5,
+        comment: 'Aurora Borealis is absolutely magical! The mint and eucalyptus notes are so refreshing, and it really does feel like wearing the northern lights. Stunning fragrance.'
+    },
+    {
+        name: 'James Anderson',
+        rating: 4,
+        comment: 'Solar Flare is intense and powerful, just like the name suggests. Perfect for making a statement. The black pepper and leather notes are incredibly masculine.'
+    },
+    {
+        name: 'Isabella Martinez',
+        rating: 5,
+        comment: 'Lunar Eclipse is dark and mysterious - exactly what I wanted. The oud and dark chocolate notes are divine. It\'s become my signature evening fragrance.'
+    },
+    {
+        name: 'Alexander Kim',
+        rating: 4,
+        comment: 'Cosmic Voyage is adventurous and bold. The leather and tobacco notes give it a sophisticated edge. Perfect for someone who wants to make an impression.'
+    },
+    {
+        name: 'Olivia Taylor',
+        rating: 5,
+        comment: 'Stellar Symphony is like wearing a beautiful orchestra. The complexity of notes is incredible - it evolves throughout the day. Truly a masterpiece.'
+    },
+    {
+        name: 'Robert Wilson',
+        rating: 4,
+        comment: 'Cosmic Dust is light and ethereal - perfect for everyday wear. It feels like floating in space. Great for someone who prefers subtle fragrances.'
+    },
+    {
+        name: 'Ava Garcia',
+        rating: 5,
+        comment: 'Moonlight Serenade is pure romance in a bottle. The white flowers and silver musk create such a dreamy, romantic atmosphere. Perfect for special occasions.'
+    },
+    {
+        name: 'Daniel Lee',
+        rating: 4,
+        comment: 'Nebula Whisper is soft and intimate - perfect for close encounters. The iris and violet notes are so delicate and beautiful. Love it!'
     }
 ];
 
@@ -662,7 +814,11 @@ document.getElementById('newsletterForm').addEventListener('submit', async funct
         showMessage('Thank you for subscribing!', 'success');
         emailInput.value = '';
     } catch (error) {
-        console.error('Subscription failed:', error);
+        console.error('Newsletter subscription failed, using demo mode:', error);
+        
+        // Demo mode: Show success message even when backend is not available
+        showMessage('Thank you for subscribing to our cosmic newsletter!', 'success');
+        emailInput.value = '';
     }
 });
 
