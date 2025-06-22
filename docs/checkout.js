@@ -1,4 +1,4 @@
-const API_BASE_URL = ''; // Same origin
+const API_BASE_URL = 'https://falak-perfumes-backend.onrender.com'; // Deployed backend URL
 const SHIPPING_COST = 50;
 let authToken = null;
 let currentUser = null;

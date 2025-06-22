@@ -535,7 +535,7 @@ async function checkout() {
         return;
     }
     
-    window.location.href = '/checkout.html';
+    window.location.href = 'checkout.html';
 }
 
 // --- AUTHENTICATION ---
@@ -584,7 +584,7 @@ function updateNavForAuth() {
             adminBtn.id = 'adminDashboardBtn';
             adminBtn.textContent = 'Admin';
             adminBtn.className = 'cta-button nav-auth-btn';
-            adminBtn.onclick = () => window.location.href = '/admin.html';
+            adminBtn.onclick = () => window.location.href = 'admin.html';
             navActions.insertBefore(adminBtn, loginBtn);
         }
 
