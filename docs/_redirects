@@ -1,3 +1,6 @@
 # GitHub Pages redirects
-# Redirect all routes to index.html for SPA behavior
-/*    /index.html   200 
+# Handle HTML files properly
+/checkout.html    /checkout.html   200
+/admin.html       /admin.html      200
+/reset-password.html /reset-password.html 200
+/*               /index.html      200 

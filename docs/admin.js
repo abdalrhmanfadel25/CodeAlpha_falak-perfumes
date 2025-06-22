@@ -36,13 +36,17 @@ const checkAdminAuth = () => {
     authToken = localStorage.getItem('falakAuthToken');
     const userJson = localStorage.getItem('falakUser');
     if (!authToken || !userJson) {
-        window.location.href = 'index.html';
+        const currentUrl = window.location.href;
+        const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+        window.location.href = baseUrl + 'index.html';
         return;
     }
     currentUser = JSON.parse(userJson);
     if (currentUser.role !== 'admin') {
         showMessage('Access denied. Admin only.', 'error');
-        window.location.href = 'index.html';
+        const currentUrl = window.location.href;
+        const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+        window.location.href = baseUrl + 'index.html';
     }
 };
 

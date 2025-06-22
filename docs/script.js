@@ -535,7 +535,10 @@ async function checkout() {
         return;
     }
     
-    window.location.href = 'checkout.html';
+    // Use a more robust navigation method for GitHub Pages
+    const currentUrl = window.location.href;
+    const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+    window.location.href = baseUrl + 'checkout.html';
 }
 
 // --- AUTHENTICATION ---
@@ -584,7 +587,11 @@ function updateNavForAuth() {
             adminBtn.id = 'adminDashboardBtn';
             adminBtn.textContent = 'Admin';
             adminBtn.className = 'cta-button nav-auth-btn';
-            adminBtn.onclick = () => window.location.href = 'admin.html';
+            adminBtn.onclick = () => {
+                const currentUrl = window.location.href;
+                const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+                window.location.href = baseUrl + 'admin.html';
+            };
             navActions.insertBefore(adminBtn, loginBtn);
         }
 
