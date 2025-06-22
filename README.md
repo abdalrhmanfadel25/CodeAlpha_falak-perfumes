@@ -167,7 +167,7 @@ For the complete application with backend functionality:
 
 ```
 falak-perfumes/
-├── public/                 # Frontend assets
+├── docs/                   # Frontend assets (GitHub Pages)
 │   ├── index.html         # Main landing page
 │   ├── admin.html         # Admin dashboard
 │   ├── checkout.html      # Checkout page

@@ -19,8 +19,8 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use(express.static('docs'));
+app.use('/uploads', express.static(path.join(__dirname, 'docs/uploads')));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/falak-perfumes', {
@@ -328,7 +328,7 @@ const authorizeAdmin = async (req, res, next) => {
 // Multer Configuration for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadPath = path.join(__dirname, 'public/uploads');
+        const uploadPath = path.join(__dirname, 'docs/uploads');
         fs.mkdirSync(uploadPath, { recursive: true }); // Ensure directory exists
         cb(null, uploadPath);
     },
@@ -355,7 +355,7 @@ const deleteProductPhoto = async (imagePath) => {
     }
     
     try {
-        const fullPath = path.join(__dirname, 'public', imagePath);
+        const fullPath = path.join(__dirname, 'docs', imagePath);
         if (fs.existsSync(fullPath)) {
             fs.unlinkSync(fullPath);
             console.log(`Deleted old product photo: ${imagePath}`);
@@ -2006,11 +2006,11 @@ const sendNewsletterWelcomeEmail = async (email) => {
 };
 
 // Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'docs')));
 
 // Serve the main HTML file
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'docs', 'index.html'));
 });
 
 // Error handling middleware

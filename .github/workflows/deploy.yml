@@ -24,9 +24,9 @@ jobs:
       
     - name: Prepare static files
       run: |
-        # Create dist directory and copy public contents to root
+        # Create dist directory and copy docs contents to root
         mkdir -p dist
-        cp -r public/* dist/
+        cp -r docs/* dist/
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
