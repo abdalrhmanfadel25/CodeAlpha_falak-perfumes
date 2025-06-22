@@ -105,6 +105,64 @@ A stunning, feature-rich e-commerce platform for luxury perfumes inspired by the
    - **Admin Panel**: http://localhost:5000/admin.html
    - **Default Admin**: admin@falakperfumes.com / admin123
 
+## 🌐 GitHub Pages Deployment
+
+### **Option 1: Static Frontend Only (Recommended for Demo)**
+
+This option deploys only the frontend files to GitHub Pages for demonstration purposes:
+
+1. **Enable GitHub Pages**
+   - Go to your repository settings
+   - Navigate to "Pages" section
+   - Select "Deploy from a branch"
+   - Choose "gh-pages" branch
+   - Save the settings
+
+2. **Deploy automatically**
+   - Push your code to the main branch
+   - GitHub Actions will automatically build and deploy to `gh-pages` branch
+   - Your site will be available at: `https://yourusername.github.io/repository-name`
+
+3. **Access your deployed site**
+   - **Live Demo**: https://abdalrhmanfadel25.github.io/CodeAlpha_falak-perfumes/
+   - **Note**: This is a static version without backend functionality
+
+### **Option 2: Full Stack Deployment**
+
+For the complete application with backend functionality:
+
+1. **Deploy Backend to Railway/Heroku**
+   ```bash
+   # Install Railway CLI
+   npm install -g @railway/cli
+   
+   # Deploy to Railway
+   railway login
+   railway init
+   railway up
+   ```
+
+2. **Update Frontend URLs**
+   - Update API endpoints in `public/script.js` and `public/admin.js`
+   - Replace `http://localhost:5000` with your deployed backend URL
+
+3. **Environment Variables**
+   - Set up environment variables in your hosting platform
+   - Configure MongoDB Atlas for database
+   - Set up email credentials
+
+### **Option 3: Vercel Deployment**
+
+1. **Connect to Vercel**
+   - Install Vercel CLI: `npm i -g vercel`
+   - Run: `vercel` in your project directory
+   - Follow the setup wizard
+
+2. **Configure for Full Stack**
+   - Vercel will automatically detect your Node.js app
+   - Set environment variables in Vercel dashboard
+   - Deploy with: `vercel --prod`
+
 ## 📁 Project Structure
 
 ```
