@@ -22,14 +22,16 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Build static files
+    - name: Prepare static files
       run: |
-        # Copy public folder to dist for deployment
-        cp -r public dist
+        # Create dist directory and copy public contents to root
+        mkdir -p dist
+        cp -r public/* dist/
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
-        publish_branch: gh-pages 
+        publish_branch: gh-pages
+        force_orphan: true 
