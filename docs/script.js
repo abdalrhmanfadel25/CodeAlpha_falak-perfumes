@@ -13,6 +13,146 @@ let cart = [];
 let currentUser = null;
 let authToken = null;
 
+// Sample product data for GitHub Pages (when backend is not available)
+const sampleProducts = [
+    {
+        _id: 'cosmic-nebula-001',
+        name: 'Cosmic Nebula',
+        description: 'A mysterious blend of oud and vanilla, inspired by distant nebulae. This fragrance captures the essence of deep space with notes of sandalwood, amber, and a hint of cosmic musk.',
+        price: 1200,
+        originalPrice: 1500,
+        discountPercentage: 20,
+        category: 'Men',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.8
+    },
+    {
+        _id: 'stellar-rose-002',
+        name: 'Stellar Rose',
+        description: 'Elegant rose petals with cosmic musk, perfect for special occasions. A sophisticated blend of Bulgarian rose, jasmine, and white musk that creates an ethereal experience.',
+        price: 980,
+        originalPrice: 1200,
+        discountPercentage: 18,
+        category: 'Women',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.9
+    },
+    {
+        _id: 'galaxy-amber-003',
+        name: 'Galaxy Amber',
+        description: 'Warm amber with hints of sandalwood, like a journey through space. Rich notes of vanilla, patchouli, and oriental spices create a luxurious and long-lasting fragrance.',
+        price: 1100,
+        originalPrice: 1400,
+        discountPercentage: 21,
+        category: 'Men',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.7
+    },
+    {
+        _id: 'lunar-jasmine-004',
+        name: 'Lunar Jasmine',
+        description: 'Delicate jasmine with moonlit notes, ethereal and enchanting. A romantic blend of jasmine, gardenia, and white tea that evokes the beauty of a moonlit night.',
+        price: 850,
+        originalPrice: 1100,
+        discountPercentage: 23,
+        category: 'Women',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.6
+    },
+    {
+        _id: 'solar-wind-005',
+        name: 'Solar Wind',
+        description: 'Fresh citrus notes with a cosmic twist, energizing and invigorating. A dynamic blend of bergamot, grapefruit, and marine notes that captures the power of solar winds.',
+        price: 920,
+        originalPrice: 1150,
+        discountPercentage: 20,
+        category: 'Men',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.5
+    },
+    {
+        _id: 'nebula-dreams-006',
+        name: 'Nebula Dreams',
+        description: 'Dreamy lavender with cosmic undertones, perfect for relaxation. A soothing blend of lavender, chamomile, and vanilla that transports you to peaceful cosmic realms.',
+        price: 780,
+        originalPrice: 980,
+        discountPercentage: 20,
+        category: 'Women',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.8
+    },
+    {
+        _id: 'cosmic-forest-007',
+        name: 'Cosmic Forest',
+        description: 'Earthy notes with a space-age twist, grounding yet mysterious. A unique blend of vetiver, cedarwood, and green tea that creates an otherworldly forest experience.',
+        price: 1050,
+        originalPrice: 1300,
+        discountPercentage: 19,
+        category: 'Men',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.4
+    },
+    {
+        _id: 'stellar-garden-008',
+        name: 'Stellar Garden',
+        description: 'Floral bouquet with cosmic elegance, sophisticated and timeless. A beautiful blend of peony, rose, and lily of the valley that creates a garden in the stars.',
+        price: 890,
+        originalPrice: 1120,
+        discountPercentage: 21,
+        category: 'Women',
+        subcategory: 'trending',
+        icon: 'fas fa-star',
+        image: '',
+        inStock: true,
+        rating: 4.7
+    }
+];
+
+// Sample feedback data for GitHub Pages
+const sampleFeedback = [
+    {
+        name: 'Sarah Johnson',
+        rating: 5,
+        comment: 'Absolutely love the Cosmic Nebula! It\'s like wearing a piece of the universe. The fragrance is so unique and long-lasting.'
+    },
+    {
+        name: 'Michael Chen',
+        rating: 5,
+        comment: 'Stellar Rose is my new signature scent. It\'s elegant, sophisticated, and gets me compliments every time I wear it.'
+    },
+    {
+        name: 'Emma Rodriguez',
+        rating: 4,
+        comment: 'Lunar Jasmine is perfect for evening events. The jasmine notes are so romantic and the cosmic twist makes it special.'
+    },
+    {
+        name: 'David Thompson',
+        rating: 5,
+        comment: 'Galaxy Amber is exactly what I was looking for. Warm, masculine, and with that mysterious cosmic quality. Highly recommend!'
+    }
+];
+
 // --- API HELPER ---
 async function apiRequest(endpoint, method = 'GET', body = null) {
     const headers = { 'Content-Type': 'application/json' };
@@ -108,8 +248,18 @@ async function fetchAndDisplayProducts() {
         allProducts = all;
 
     } catch (error) {
-        console.error('Failed to fetch products:', error);
-        showMessage('Failed to load products. Please try again later.', 'error');
+        console.error('Failed to fetch products from backend, using sample data:', error);
+        
+        // Use sample data when backend is not available (GitHub Pages)
+        allProducts = sampleProducts;
+        
+        const trending = sampleProducts.filter(p => p.subcategory === 'trending');
+        const bestselling = sampleProducts.filter(p => p.subcategory === 'bestselling');
+        
+        displayProducts(trending, 'trendingGrid');
+        displayProducts(bestselling, 'bestsellingGrid');
+        
+        showMessage('Using sample products. Backend connection unavailable.', 'info');
     }
 }
 
@@ -494,7 +644,10 @@ async function fetchAndDisplayFeedback() {
         const feedback = await apiRequest('/feedback');
         displayFeedback(feedback);
     } catch (error) {
-        console.error('Failed to fetch feedback:', error);
+        console.error('Failed to fetch feedback from backend, using sample data:', error);
+        
+        // Use sample feedback when backend is not available
+        displayFeedback(sampleFeedback);
     }
 }
 
@@ -532,7 +685,23 @@ async function showCategoryProducts(category) {
         filteredSection.scrollIntoView({ behavior: 'smooth' });
 
     } catch (error) {
-        console.error(`Failed to fetch ${category} products:`, error);
+        console.error(`Failed to fetch ${category} products from backend, using sample data:`, error);
+        
+        // Use sample data when backend is not available
+        const categoryProducts = sampleProducts.filter(p => p.category.toLowerCase() === category);
+        const filteredSection = document.getElementById('filtered-products');
+        const trendingSection = document.getElementById('trending');
+        const bestsellingSection = document.getElementById('bestselling');
+        const filteredTitle = document.getElementById('filtered-title');
+
+        filteredTitle.textContent = category === 'men' ? "Fragrances for Him" : "Fragrances for Her";
+        displayProducts(categoryProducts, 'filteredGrid');
+
+        trendingSection.style.display = 'none';
+        bestsellingSection.style.display = 'none';
+        filteredSection.style.display = 'block';
+
+        filteredSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
