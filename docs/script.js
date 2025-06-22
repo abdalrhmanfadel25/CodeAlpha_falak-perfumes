@@ -4,8 +4,8 @@ AOS.init({
     once: true
 });
 
-// Update this URL to your deployed backend
-const API_BASE_URL = 'https://falak-perfumes-backend.onrender.com'; // Replace with your actual backend URL
+// Use local backend server
+const API_BASE_URL = ''; // The backend is on the same origin
 
 // --- STATE MANAGEMENT ---
 let allProducts = [];
@@ -96,54 +96,6 @@ function displayProducts(productsToDisplay, gridId) {
     `).join('');
 }
 
-// Demo data for when backend is not available
-const demoProducts = [
-    {
-        _id: 'demo1',
-        name: 'Cosmic Nebula',
-        description: 'A mysterious blend of oud and vanilla, inspired by distant nebulae.',
-        price: 1200,
-        originalPrice: 1500,
-        discountPercentage: 20,
-        category: 'Men',
-        subcategory: 'trending',
-        icon: 'fas fa-star'
-    },
-    {
-        _id: 'demo2',
-        name: 'Stellar Rose',
-        description: 'Elegant rose petals with cosmic musk, perfect for special occasions.',
-        price: 980,
-        originalPrice: 1200,
-        discountPercentage: 18,
-        category: 'Women',
-        subcategory: 'trending',
-        icon: 'fas fa-star'
-    },
-    {
-        _id: 'demo3',
-        name: 'Galaxy Amber',
-        description: 'Warm amber with hints of sandalwood, like a journey through space.',
-        price: 1100,
-        originalPrice: 1400,
-        discountPercentage: 21,
-        category: 'Men',
-        subcategory: 'bestselling',
-        icon: 'fas fa-star'
-    },
-    {
-        _id: 'demo4',
-        name: 'Lunar Jasmine',
-        description: 'Delicate jasmine with moonlit notes, ethereal and enchanting.',
-        price: 850,
-        originalPrice: 1100,
-        discountPercentage: 23,
-        category: 'Women',
-        subcategory: 'bestselling',
-        icon: 'fas fa-star'
-    }
-];
-
 async function fetchAndDisplayProducts() {
     try {
         const trendingProducts = await apiRequest('/products?subcategory=trending');
@@ -156,16 +108,8 @@ async function fetchAndDisplayProducts() {
         allProducts = all;
 
     } catch (error) {
-        console.error('Failed to fetch products, using demo data:', error);
-        // Use demo data when backend is not available
-        allProducts = demoProducts;
-        const trending = demoProducts.filter(p => p.subcategory === 'trending');
-        const bestselling = demoProducts.filter(p => p.subcategory === 'bestselling');
-        
-        displayProducts(trending, 'trendingGrid');
-        displayProducts(bestselling, 'bestsellingGrid');
-        
-        showMessage('Demo mode: Using sample data. Backend connection unavailable.', 'info');
+        console.error('Failed to fetch products:', error);
+        showMessage('Failed to load products. Please try again later.', 'error');
     }
 }
 
@@ -363,24 +307,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         showMessage('Welcome back!', 'success');
     } catch (error) {
         console.error('Login failed:', error);
-        
-        // Demo mode: Create a mock login for demonstration
-        if (error.message.includes('Server is not responding') || error.message.includes('Unable to connect')) {
-            const demoUser = {
-                id: 'demo-user-' + Date.now(),
-                name: 'Demo User',
-                email: email,
-                role: 'customer'
-            };
-            const demoToken = 'demo-token-' + Date.now();
-            
-            authToken = demoToken;
-            currentUser = demoUser;
-            saveAuthToLocalStorage(authToken, currentUser);
-            updateNavForAuth();
-            closeModal('loginModal');
-            showMessage('Demo mode: Login successful! (Backend unavailable)', 'success');
-        }
     }
 });
 
@@ -400,24 +326,6 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         showMessage('Account created successfully!', 'success');
     } catch (error) {
         console.error('Registration failed:', error);
-        
-        // Demo mode: Create a mock user for demonstration
-        if (error.message.includes('Server is not responding') || error.message.includes('Unable to connect')) {
-            const demoUser = {
-                id: 'demo-user-' + Date.now(),
-                name: name,
-                email: email,
-                role: 'customer'
-            };
-            const demoToken = 'demo-token-' + Date.now();
-            
-            authToken = demoToken;
-            currentUser = demoUser;
-            saveAuthToLocalStorage(authToken, currentUser);
-            updateNavForAuth();
-            closeModal('registerModal');
-            showMessage('Demo mode: Account created successfully! (Backend unavailable)', 'success');
-        }
     }
 });
 
