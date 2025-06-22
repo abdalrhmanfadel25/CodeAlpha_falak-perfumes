@@ -4,8 +4,8 @@ AOS.init({
     once: true
 });
 
-// Use local backend server
-const API_BASE_URL = ''; // The backend is on the same origin
+// Use deployed backend URL for GitHub Pages
+const API_BASE_URL = 'https://falak-perfumes-backend.onrender.com'; // Deployed backend URL
 
 // --- STATE MANAGEMENT ---
 let allProducts = [];

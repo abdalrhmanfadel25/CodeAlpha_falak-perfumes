@@ -16,8 +16,21 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// CORS configuration for GitHub Pages and other origins
+app.use(cors({
+    origin: [
+        'https://abdalrhmanfadel25.github.io',
+        'https://falak-perfumes-backend.onrender.com',
+        'http://localhost:3000',
+        'http://localhost:5000',
+        'http://127.0.0.1:5000'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.static('docs'));
 app.use('/uploads', express.static(path.join(__dirname, 'docs/uploads')));

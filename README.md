@@ -107,61 +107,147 @@ A stunning, feature-rich e-commerce platform for luxury perfumes inspired by the
 
 ## 🌐 GitHub Pages Deployment
 
-### **Option 1: Static Frontend Only (Recommended for Demo)**
+### **Option 1: Deploy Backend to Render (Recommended)**
 
-This option deploys only the frontend files to GitHub Pages for demonstration purposes:
+1. **Deploy Backend to Render**
+   ```bash
+   # Go to https://render.com and sign up
+   # Click "New +" and select "Web Service"
+   # Connect your GitHub repository
+   # Configure the service:
+   # - Name: falak-perfumes-backend
+   # - Environment: Node
+   # - Build Command: npm install
+   # - Start Command: npm start
+   # - Plan: Free
+   ```
 
-1. **Enable GitHub Pages**
+2. **Set Environment Variables in Render**
+   ```env
+   MONGODB_URI=mongodb+srv://your-username:your-password@cluster.mongodb.net/falak-perfumes
+   JWT_SECRET=your-super-secret-jwt-key
+   EMAIL_USER=your-email@gmail.com
+   EMAIL_PASS=your-app-password
+   ADMIN_EMAIL=admin@falakperfumes.com
+   ```
+
+3. **Deploy Frontend to GitHub Pages**
    - Go to your repository settings
    - Navigate to "Pages" section
    - Select "Deploy from a branch"
-   - Choose "gh-pages" branch
-   - Save the settings
+   - Choose "main" branch
+   - Select "/docs" folder
+   - Click "Save"
 
-2. **Deploy automatically**
-   - Push your code to the main branch
-   - GitHub Actions will automatically build and deploy to `gh-pages` branch
-   - Your site will be available at: `https://yourusername.github.io/repository-name`
+4. **Update API URL**
+   - The frontend is already configured to use: `https://falak-perfumes-backend.onrender.com`
+   - Your site will be live at: `https://abdalrhmanfadel25.github.io/CodeAlpha_falak-perfumes/`
 
-3. **Access your deployed site**
-   - **Live Demo**: https://abdalrhmanfadel25.github.io/CodeAlpha_falak-perfumes/
-   - **Note**: This is a static version without backend functionality
+### **Option 2: Deploy Backend to Railway**
 
-### **Option 2: Full Stack Deployment**
-
-For the complete application with backend functionality:
-
-1. **Deploy Backend to Railway/Heroku**
+1. **Deploy Backend to Railway**
    ```bash
    # Install Railway CLI
    npm install -g @railway/cli
    
-   # Deploy to Railway
+   # Login to Railway
    railway login
+   
+   # Initialize and deploy
    railway init
    railway up
    ```
 
-2. **Update Frontend URLs**
-   - Update API endpoints in `public/script.js` and `public/admin.js`
-   - Replace `http://localhost:5000` with your deployed backend URL
+2. **Set Environment Variables in Railway Dashboard**
+   - Go to your Railway project dashboard
+   - Add the same environment variables as above
 
-3. **Environment Variables**
-   - Set up environment variables in your hosting platform
-   - Configure MongoDB Atlas for database
-   - Set up email credentials
+3. **Update API URL in docs/script.js**
+   ```javascript
+   const API_BASE_URL = 'https://your-railway-app.railway.app';
+   ```
 
-### **Option 3: Vercel Deployment**
+### **Option 3: Deploy Backend to Vercel**
 
-1. **Connect to Vercel**
-   - Install Vercel CLI: `npm i -g vercel`
-   - Run: `vercel` in your project directory
-   - Follow the setup wizard
+1. **Deploy Backend to Vercel**
+   ```bash
+   # Install Vercel CLI
+   npm install -g vercel
+   
+   # Deploy
+   vercel
+   ```
 
-2. **Configure for Full Stack**
-   - Vercel will automatically detect your Node.js app
-   - Set environment variables in Vercel dashboard
-   - Deploy with: `vercel --prod`
+2. **Set Environment Variables in Vercel Dashboard**
+   - Go to your Vercel project dashboard
+   - Add the same environment variables as above
+
+3. **Update API URL in docs/script.js**
+   ```javascript
+   const API_BASE_URL = 'https://your-vercel-app.vercel.app';
+   ```
+
+### **Option 4: Deploy Backend to Heroku**
+
+1. **Deploy Backend to Heroku**
+   ```bash
+   # Install Heroku CLI
+   # Create Heroku app
+   heroku create falak-perfumes-backend
+   
+   # Deploy
+   git push heroku main
+   ```
+
+2. **Set Environment Variables in Heroku**
+   ```bash
+   heroku config:set MONGODB_URI=your-mongodb-uri
+   heroku config:set JWT_SECRET=your-jwt-secret
+   heroku config:set EMAIL_USER=your-email
+   heroku config:set EMAIL_PASS=your-password
+   ```
+
+## 🗄️ Database Setup
+
+### **MongoDB Atlas (Recommended for Production)**
+
+1. **Create MongoDB Atlas Account**
+   - Go to https://mongodb.com/atlas
+   - Create a free account
+   - Create a new cluster
+
+2. **Get Connection String**
+   - Click "Connect" on your cluster
+   - Choose "Connect your application"
+   - Copy the connection string
+   - Replace `<password>` with your database password
+
+3. **Set Environment Variable**
+   ```env
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/falak-perfumes
+   ```
+
+## 📧 Email Configuration
+
+### **Gmail Setup**
+1. Enable 2-factor authentication on your Gmail account
+2. Generate an App Password
+3. Use the App Password in EMAIL_PASS environment variable
+
+## 🚀 Quick Deployment Checklist
+
+- [ ] Deploy backend to Render/Railway/Vercel/Heroku
+- [ ] Set up MongoDB Atlas database
+- [ ] Configure environment variables
+- [ ] Deploy frontend to GitHub Pages
+- [ ] Test the application
+- [ ] Update API URL if needed
+
+## 🔗 Live Demo URLs
+
+- **Frontend**: https://abdalrhmanfadel25.github.io/CodeAlpha_falak-perfumes/
+- **Backend**: https://falak-perfumes-backend.onrender.com (after deployment)
+- **Admin Panel**: https://abdalrhmanfadel25.github.io/CodeAlpha_falak-perfumes/admin.html
 
 ## 📁 Project Structure
 
@@ -234,19 +320,6 @@ The project uses CSS custom properties for easy theming:
 2. **Custom Email Templates**: Modify email HTML in server.js
 3. **Additional Payment Methods**: Extend the checkout system
 4. **Analytics Integration**: Add tracking codes to index.html
-
-## 📧 Email Configuration
-
-### Gmail Setup
-1. Enable 2-factor authentication
-2. Generate an App Password
-3. Use the App Password in EMAIL_PASS
-
-### Anti-Spam Measures
-- Professional email headers
-- Rate limiting (14 emails/second)
-- DKIM support (when configured)
-- One-click unsubscribe compliance
 
 ## 🔧 Development
 
