@@ -837,6 +837,10 @@ p {
     background: linear-gradient(45deg, #ff6b6b, #ee5a52);
 }
 
+.message.info {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+}
+
 /* --- Responsive Design --- */
 @media (max-width: 992px) {
     .hero-title {

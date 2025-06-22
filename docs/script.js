@@ -4,7 +4,8 @@ AOS.init({
     once: true
 });
 
-const API_BASE_URL = ''; // The backend is on the same origin
+// Update this URL to your deployed backend
+const API_BASE_URL = 'https://falak-perfumes-backend.onrender.com'; // Replace with your actual backend URL
 
 // --- STATE MANAGEMENT ---
 let allProducts = [];
@@ -32,20 +33,27 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
         showLoading();
         const response = await fetch(`${API_BASE_URL}/api${endpoint}`, config);
         
+        // Check if response is JSON
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error('Server is not responding properly. Please try again later.');
+        }
+        
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.error || 'Something went wrong');
         }
 
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-            return await response.json();
-        } else {
-            return { success: true };
-        }
+        return await response.json();
     } catch (error) {
         console.error(`API Error on ${method} ${endpoint}:`, error);
-        showMessage(error.message, 'error');
+        
+        // Show user-friendly error message
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            showMessage('Unable to connect to server. Please check your internet connection or try again later.', 'error');
+        } else {
+            showMessage(error.message, 'error');
+        }
         throw error;
     } finally {
         hideLoading();
@@ -88,6 +96,54 @@ function displayProducts(productsToDisplay, gridId) {
     `).join('');
 }
 
+// Demo data for when backend is not available
+const demoProducts = [
+    {
+        _id: 'demo1',
+        name: 'Cosmic Nebula',
+        description: 'A mysterious blend of oud and vanilla, inspired by distant nebulae.',
+        price: 1200,
+        originalPrice: 1500,
+        discountPercentage: 20,
+        category: 'Men',
+        subcategory: 'trending',
+        icon: 'fas fa-star'
+    },
+    {
+        _id: 'demo2',
+        name: 'Stellar Rose',
+        description: 'Elegant rose petals with cosmic musk, perfect for special occasions.',
+        price: 980,
+        originalPrice: 1200,
+        discountPercentage: 18,
+        category: 'Women',
+        subcategory: 'trending',
+        icon: 'fas fa-star'
+    },
+    {
+        _id: 'demo3',
+        name: 'Galaxy Amber',
+        description: 'Warm amber with hints of sandalwood, like a journey through space.',
+        price: 1100,
+        originalPrice: 1400,
+        discountPercentage: 21,
+        category: 'Men',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star'
+    },
+    {
+        _id: 'demo4',
+        name: 'Lunar Jasmine',
+        description: 'Delicate jasmine with moonlit notes, ethereal and enchanting.',
+        price: 850,
+        originalPrice: 1100,
+        discountPercentage: 23,
+        category: 'Women',
+        subcategory: 'bestselling',
+        icon: 'fas fa-star'
+    }
+];
+
 async function fetchAndDisplayProducts() {
     try {
         const trendingProducts = await apiRequest('/products?subcategory=trending');
@@ -100,7 +156,16 @@ async function fetchAndDisplayProducts() {
         allProducts = all;
 
     } catch (error) {
-        console.error('Failed to fetch products:', error);
+        console.error('Failed to fetch products, using demo data:', error);
+        // Use demo data when backend is not available
+        allProducts = demoProducts;
+        const trending = demoProducts.filter(p => p.subcategory === 'trending');
+        const bestselling = demoProducts.filter(p => p.subcategory === 'bestselling');
+        
+        displayProducts(trending, 'trendingGrid');
+        displayProducts(bestselling, 'bestsellingGrid');
+        
+        showMessage('Demo mode: Using sample data. Backend connection unavailable.', 'info');
     }
 }
 
@@ -298,6 +363,24 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         showMessage('Welcome back!', 'success');
     } catch (error) {
         console.error('Login failed:', error);
+        
+        // Demo mode: Create a mock login for demonstration
+        if (error.message.includes('Server is not responding') || error.message.includes('Unable to connect')) {
+            const demoUser = {
+                id: 'demo-user-' + Date.now(),
+                name: 'Demo User',
+                email: email,
+                role: 'customer'
+            };
+            const demoToken = 'demo-token-' + Date.now();
+            
+            authToken = demoToken;
+            currentUser = demoUser;
+            saveAuthToLocalStorage(authToken, currentUser);
+            updateNavForAuth();
+            closeModal('loginModal');
+            showMessage('Demo mode: Login successful! (Backend unavailable)', 'success');
+        }
     }
 });
 
@@ -317,6 +400,24 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         showMessage('Account created successfully!', 'success');
     } catch (error) {
         console.error('Registration failed:', error);
+        
+        // Demo mode: Create a mock user for demonstration
+        if (error.message.includes('Server is not responding') || error.message.includes('Unable to connect')) {
+            const demoUser = {
+                id: 'demo-user-' + Date.now(),
+                name: name,
+                email: email,
+                role: 'customer'
+            };
+            const demoToken = 'demo-token-' + Date.now();
+            
+            authToken = demoToken;
+            currentUser = demoUser;
+            saveAuthToLocalStorage(authToken, currentUser);
+            updateNavForAuth();
+            closeModal('registerModal');
+            showMessage('Demo mode: Account created successfully! (Backend unavailable)', 'success');
+        }
     }
 });
 
