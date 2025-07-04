@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Falak Perfumes</title>
+    <link rel="stylesheet" href="checkout.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="checkout-container">
+        <!-- Order Summary (Right side on Desktop, Top on Mobile) -->
+        <aside class="order-summary">
+            <!-- Collapsible Header for Mobile -->
+            <div class="summary-mobile-header" id="summaryMobileHeader">
+                <div class="summary-mobile-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Show Order Summary</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <span class="summary-mobile-total" id="summaryMobileTotal">EGP 0.00</span>
+            </div>
+
+            <!-- Cart Timer Display -->
+            <div id="cartTimerCheckout" style="text-align:center; color:#ff6b6b; font-weight:bold; margin-bottom:1rem;"></div>
+
+            <!-- Full Summary Content -->
+            <div class="summary-content" id="summaryContent">
+                <h2 class="summary-title">Order Summary</h2>
+                <div id="summaryItems" class="summary-items">
+                    <!-- Items will be loaded by JS -->
+                </div>
+                <div class="summary-promo">
+                    <input type="text" id="promoCode" placeholder="Discount code" class="form-input">
+                    <button id="applyPromoBtn" class="promo-button">Apply</button>
+                </div>
+                <div class="summary-calculation">
+                    <div class="calc-row">
+                        <span>Subtotal</span>
+                        <span id="summarySubtotal">EGP 0.00</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Shipping</span>
+                        <span id="summaryShipping">EGP 70.00</span>
+                    </div>
+                    <div class="calc-row total">
+                        <span>Total</span>
+                        <span id="summaryTotal">EGP 70.00</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Form (Left side on Desktop, Bottom on Mobile) -->
+        <main class="checkout-form">
+            <div class="form-header">
+                <h1>Falak</h1>
+                <a href="/index.html" class="continue-shopping"> <i class="fas fa-arrow-left"></i> Continue Shopping</a>
+            </div>
+            
+            <form id="checkoutForm">
+                <section class="form-section">
+                    <h2>Contact</h2>
+                    <p>Have an account? <a href="/index.html" class="login-link">Log in</a></p>
+                    <input type="text" id="email" placeholder="Email or mobile phone number" required class="form-input">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="emailUpdates" checked>
+                        <label for="emailUpdates">Email me with news and offers</label>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Delivery</h2>
+                    <div class="form-row">
+                        <input type="text" id="firstName" placeholder="First name" required class="form-input">
+                        <input type="text" id="lastName" placeholder="Last name" required class="form-input">
+                    </div>
+                    <input type="text" id="address" placeholder="Address" required class="form-input">
+                    <div class="form-row">
+                        <select id="governorate" required class="form-input">
+                            <option value="">Select Governorate</option>
+                        </select>
+                        <input type="text" id="area" placeholder="Area / District" required class="form-input">
+                    </div>
+                    <input type="tel" id="phone" placeholder="Phone" required class="form-input">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="saveInfo">
+                        <label for="saveInfo">Save this information for next time</label>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h2>Shipping method</h2>
+                    <div class="shipping-method">
+                        <span>Fast Shipping</span>
+                        <strong>EGP 70.00</strong>
+                    </div>
+                </section>
+                
+                <section class="form-section">
+                    <h2>Payment</h2>
+                    <p>All transactions are secure and encrypted.</p>
+                    <div class="payment-method">
+                        <span>Cash on Delivery (COD)</span>
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                </section>
+                
+                <section class="form-section">
+                    <h2>Billing address</h2>
+                    <p>Select the address that matches your card or payment method.</p>
+                    <div class="billing-options">
+                        <div class="radio-row">
+                            <input type="radio" id="sameAddress" name="billing" value="same" checked>
+                            <label for="sameAddress">Same as shipping address</label>
+                        </div>
+                        <div class="radio-row">
+                            <input type="radio" id="diffAddress" name="billing" value="different">
+                            <label for="diffAddress">Use a different billing address</label>
+                        </div>
+                    </div>
+                    <div id="billingAddressForm" class="billing-form hidden">
+                        <div class="form-row">
+                            <input type="text" id="billingFirstName" placeholder="First name" class="form-input">
+                            <input type="text" id="billingLastName" placeholder="Last name" class="form-input">
+                        </div>
+                        <input type="text" id="billingAddress" placeholder="Address" class="form-input">
+                        <select id="billingGovernorate" class="form-input">
+                           <option value="">Select Governorate</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="form-section" id="application-summary-bottom">
+                    <h2 class="summary-title">Application Summary</h2>
+                    <div id="summaryItemsBottom" class="summary-items">
+                        <!-- Items will be loaded by JS -->
+                    </div>
+                    <div class="summary-promo">
+                        <input type="text" id="promoCodeBottom" placeholder="Discount code" class="form-input">
+                        <button id="applyPromoBtnBottom" class="promo-button" type="button">Apply</button>
+                    </div>
+                    <div id="cartTimerCheckoutBottom" style="text-align:center; color:#ff6b6b; font-weight:bold; margin-bottom:1rem;"></div>
+                    <div class="summary-calculation" style="padding-top: 1rem; border-top: 1px solid var(--color-border); margin-top: 1rem;">
+                        <div class="calc-row">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotalBottom">EGP 0.00</span>
+                        </div>
+                        <div class="calc-row">
+                            <span>Shipping</span>
+                            <span id="summaryShippingBottom">EGP 70.00</span>
+                        </div>
+                        <div class="calc-row total">
+                            <span>Total</span>
+                            <span id="summaryTotalBottom">EGP 70.00</span>
+                        </div>
+                    </div>
+                </section>
+
+                <button type="submit" class="purchase-button">Complete Purchase</button>
+            </form>
+        </main>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+    <div id="message" class="message"></div>
+
+    <script src="checkout.js"></script>
+</body>
+</html> 

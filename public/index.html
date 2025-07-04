@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falak - Luxury Perfumes Inspired by the Cosmos</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Falak</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#trending">Trending</a></li>
+                <li><a href="#bestselling">Best-Selling</a></li>
+                <li><a href="#new-collection">Collection</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="navAuthBtn" class="cta-button nav-auth-btn">Login</button>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-close" id="mobileNavClose">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#trending">Trending</a></li>
+            <li><a href="#bestselling">Best-Selling</a></li>
+            <li><a href="#new-collection">Collection</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="hero-title">FALAK</h1>
+            <p class="hero-subtitle">Experience luxury fragrances that capture the ethereal beauty of the universe. A celestial journey in every bottle.</p>
+            <a href="#trending" class="cta-button">Explore Fragrances</a>
+        </div>
+    </section>
+
+    <!-- Viewer Count -->
+    <div id="viewerCount" class="viewer-count" style="text-align:center; font-size:1.1rem; color:#ffd700; margin: 1.5rem 0;">
+        <i class="fas fa-eye"></i> <span id="viewerNumber">0</span> people are viewing this page
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main>
+        <!-- Trending Products -->
+        <section id="trending" class="section">
+            <h2 class="section-title" data-aos="fade-up">Trending Now</h2>
+            <div class="products-grid" id="trendingGrid">
+                <!-- Trending products will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Best Selling Products -->
+        <section id="bestselling" class="section">
+            <h2 class="section-title" data-aos="fade-up">Best-Sellers</h2>
+            <div class="products-grid" id="bestsellingGrid">
+                <!-- Best-selling products will be loaded here -->
+            </div>
+        </section>
+
+        <!-- New Collection Section -->
+        <section id="new-collection" class="section-cta">
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title">The Andromeda Collection</h2>
+                <p class="cta-text">Unveiling our latest creation. A symphony of ethereal notes inspired by the majestic Andromeda galaxy. Discover your new signature scent.</p>
+                <a href="#trending" class="cta-button-alt">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- Category Selection -->
+        <section id="category-selection" class="section">
+            <div class="category-grid">
+                <div class="category-card" data-aos="fade-right" onclick="showCategoryProducts('men')">
+                    <div class="category-content">
+                        <h3>For Him</h3>
+                        <p>Explore bold and cosmic fragrances</p>
+                        <span class="shop-now-link">Shop Now <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+                <div class="category-card" data-aos="fade-left" onclick="showCategoryProducts('women')">
+                    <div class="category-content">
+                        <h3>For Her</h3>
+                        <p>Discover elegant and stellar scents</p>
+                        <span class="shop-now-link">Shop Now <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtered Products Section (Initially Hidden) -->
+        <section id="filtered-products" class="section" style="display: none;">
+            <h2 class="section-title" id="filtered-title" data-aos="fade-up"></h2>
+            <div class="products-grid" id="filteredGrid">
+                <!-- Filtered products will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose-us" class="section">
+            <h2 class="section-title" data-aos="fade-up">Why Falak?</h2>
+            <div class="features-grid">
+                <div class="feature-item" data-aos="fade-right">
+                    <i class="fas fa-star feature-icon"></i>
+                    <h3 class="feature-title">Cosmic Ingredients</h3>
+                    <p>We source rare and exotic ingredients inspired by celestial phenomena, creating truly unique scent profiles.</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up">
+                    <i class="fas fa-hand-sparkles feature-icon"></i>
+                    <h3 class="feature-title">Artisanal Craftsmanship</h3>
+                    <p>Each perfume is meticulously blended by master perfumers, ensuring a luxurious and long-lasting experience.</p>
+                </div>
+                <div class="feature-item" data-aos="fade-left">
+                    <i class="fas fa-infinity feature-icon"></i>
+                    <h3 class="feature-title">Lasting Elegance</h3>
+                    <p>Our fragrances are designed to evolve on your skin, telling a story that lasts from dawn till dusk.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feedback Section -->
+        <section id="feedback" class="section">
+            <h2 class="section-title" data-aos="fade-up">From Our Customers</h2>
+            <div class="feedback-grid" id="feedbackGrid">
+                <!-- Feedback will be loaded here -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title" data-aos="fade-up">Our Story</h2>
+            <div class="about-content">
+                <div class="about-image" data-aos="fade-right">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h3>Born from Stardust</h3>
+                    <p>Falak was born from a fascination with the cosmos. We believe fragrance has the power to transport you to otherworldly realms.</p>
+                    <p>Each of our perfumes is crafted with the precision of astronomers and the artistry of perfumers, capturing the essence of distant galaxies, shimmering nebulae, and cosmic phenomena.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="contact" class="section-newsletter">
+            <div class="newsletter-content" data-aos="fade-up">
+                <h2 class="newsletter-title">Join the Falak Universe</h2>
+                <p>Be the first to hear about new collections, exclusive offers, and cosmic events.</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                    <button type="submit" class="cta-button">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Welcome Back</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="form-button">Sign In</button>
+            </form>
+            <div class="form-divider">OR</div>
+            <button onclick="location.href='/api/auth/google'" class="google-button">
+                <i class="fab fa-google"></i> Sign in with Google
+            </button>
+            <p style="text-align: center; margin-top: 1rem; color: #ccc;">
+                <a href="#" onclick="openModal('forgotPasswordModal')" style="color: #ffd700;">Forgot password?</a>
+            </p>
+            <p style="text-align: center; margin-top: 1rem; color: #ccc;">
+                Don't have an account? <a href="#" onclick="switchToRegister()" style="color: #ffd700;">Register</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Join Falak</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <button type="submit" class="form-button">Create Account</button>
+            </form>
+            <p style="text-align: center; margin-top: 1rem; color: #ccc;">
+                Already have an account? <a href="#" onclick="switchToLogin()" style="color: #ffd700;">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('forgotPasswordModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Reset Password</h2>
+            <form id="forgotPasswordForm">
+                <p style="text-align: center; margin-bottom: 1.5rem;">Enter your email and we'll send you a link to reset your password.</p>
+                <div class="form-group">
+                    <label for="forgotEmail">Email</label>
+                    <input type="email" id="forgotEmail" required>
+                </div>
+                <button type="submit" class="form-button">Send Reset Link</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button onclick="toggleCart()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        </div>
+        <div id="cartTimer" style="color:#ff6b6b; font-weight:bold; text-align:center; margin-bottom:1rem;"></div>
+        <div id="cartItems">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <div class="cart-total">
+            <h3>Total: EGP<span id="cartTotal">0.00</span></h3>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2025 Falak Perfumes. All rights reserved. | made by <a href="www.linkedin.com/in/abdalrhman-fadel-0226791b9" style="color: #ffd700;">Fadel</a></p>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Message Container -->
+    <div id="message" class="message"></div>
+
+    <div id="toast" class="toast"></div>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeProductDetails()">&times;</button>
+            <div id="modal-body" class="modal-body">
+                <!-- Product details will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

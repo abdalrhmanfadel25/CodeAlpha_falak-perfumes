@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Falak Perfumes</title>
+    <link rel="stylesheet" href="admin-cleaned.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="admin-container" class="admin-container">
+        <aside class="sidebar">
+            <h1 class="logo">Falak Admin</h1>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="#products" class="nav-item"><i class="fas fa-box"></i> Products</a>
+                <a href="#orders" class="nav-item"><i class="fas fa-shopping-cart"></i> Orders</a>
+                <a href="#users" class="nav-item"><i class="fas fa-users"></i> Users</a>
+                <a href="/index.html" class="nav-item"><i class="fas fa-home"></i> Back to Site</a>
+            </nav>
+            <div class="sidebar-footer">
+                <label for="font-choice">UI Font:</label>
+                <select id="font-choice">
+                    <option value="lato">Default (Lato)</option>
+                    <option value="poppins">Poppins</option>
+                    <option value="roboto">Roboto</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+                <h2>Dashboard</h2>
+            </header>
+
+            <section id="dashboard" class="page active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <p id="totalRevenue">EGP 0</p>
+                    </div>
+                     <div class="stat-card">
+                        <h3>Avg. Order Value</h3>
+                        <p id="averageOrderValue">EGP 0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Orders</h3>
+                        <p id="totalOrders">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Customers</h3>
+                        <p id="totalUsers">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>New Customers (30d)</h3>
+                        <p id="newUsersLast30Days">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Products</h3>
+                        <p id="totalProducts">0</p>
+                    </div>
+                </div>
+
+                <div class="recent-orders-container" id="recent-orders-container">
+                    <h3>Recent Orders</h3>
+                    <div id="recentOrdersList">
+                        <!-- Recent orders will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="products" class="page">
+                <h2 class="page-title">Manage Products</h2>
+                <div class="product-form-container">
+                    <h3 id="formTitle">Add New Product</h3>
+                    <form id="productForm">
+                        <input type="hidden" id="productId">
+                        <div class="form-row">
+                            <input type="text" id="name" placeholder="Product Name" required>
+                            <input type="number" id="price" placeholder="Price (EGP)" required>
+                        </div>
+                        <textarea id="description" placeholder="Description" required></textarea>
+                        
+                        <div class="form-group-upload">
+                            <label for="imageUpload">Product Image</label>
+                            <input type="file" id="imageUpload" accept="image/*">
+                            <input type="hidden" id="image"> <!-- This will hold the URL from upload -->
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <select id="category" required>
+                                <option value="men">For Him</option>
+                                <option value="women">For Her</option>
+                            </select>
+                            <select id="subcategory" required>
+                                <option value="trending">Trending</option>
+                                <option value="bestselling">Best-Selling</option>
+                                <option value="new">New</option>
+                            </select>
+                             <select id="icon" required>
+                                <option value="fas fa-star">Star (Default)</option>
+                                <option value="fas fa-meteor">Meteor</option>
+                                <option value="fas fa-bolt">Bolt</option>
+                                <option value="fas fa-moon">Moon</option>
+                                <option value="fas fa-sun">Sun</option>
+                                <option value="fas fa-space-shuttle">Shuttle</option>
+                                <option value="fas fa-satellite">Satellite</option>
+                                <option value="fas fa-cloud">Cloud</option>
+                                <option value="fas fa-seedling">Seedling</option>
+                                <option value="fas fa-gem">Gem</option>
+                                <option value="fas fa-fire">Fire</option>
+                                <option value="fas fa-snowflake">Snowflake</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <input type="number" id="adminDiscount" placeholder="Discount Percentage (0-100)" min="0" max="100" step="1">
+                        </div>
+                        <button type="submit" id="formSubmitBtn">Add Product</button>
+                        <button type="button" id="formCancelBtn" class="cancel-btn" style="display: none;">Cancel Edit</button>
+                    </form>
+                </div>
+                <div class="product-list" id="productList">
+                    <!-- Products will be loaded here -->
+                </div>
+            </section>
+
+            <section id="orders" class="page">
+                <h2 class="page-title">Manage Orders</h2>
+                <div id="orderBoard" class="order-board">
+                    <div class="order-column">
+                        <h3 class="column-title">Pending</h3>
+                        <div class="column-body" id="orders-pending" data-status="Pending"></div>
+                    </div>
+                    <div class="order-column">
+                        <h3 class="column-title">In Process</h3>
+                        <div class="column-body" id="orders-in-process" data-status="In Process"></div>
+                    </div>
+                    <div class="order-column">
+                        <h3 class="column-title">Completed</h3>
+                        <div class="column-body" id="orders-completed" data-status="Completed"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="users" class="page">
+                <h2 class="page-title">Manage Users</h2>
+                <div class="user-management-container">
+                    <div class="user-form-container">
+                        <h3>Add New Admin</h3>
+                        <form id="adminForm">
+                            <div class="form-row">
+                                <input type="text" id="adminName" placeholder="Admin Name" required>
+                                <input type="email" id="adminEmail" placeholder="Admin Email" required>
+                            </div>
+                            <div class="form-row">
+                                <input type="password" id="adminPassword" placeholder="Password" required>
+                                <input type="password" id="adminConfirmPassword" placeholder="Confirm Password" required>
+                            </div>
+                            <button type="submit" id="adminSubmitBtn">Add Admin</button>
+                        </form>
+                    </div>
+                    <div class="user-list" id="userList">
+                        <!-- Users will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div id="passwordChangeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('passwordChangeModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #ffd700;">Change Password</h2>
+            <form id="passwordChangeForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" required>
+                </div>
+                <button type="submit" class="form-button">Change Password</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="orderDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('orderDetailsModal')">&times;</span>
+            <div id="orderDetailsContent">
+                <!-- Order details will be injected here -->
+            </div>
+            <div class="modal-footer">
+                <button class="close-btn" onclick="closeModal('orderDetailsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html> 
